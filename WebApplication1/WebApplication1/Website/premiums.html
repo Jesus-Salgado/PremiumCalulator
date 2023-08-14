@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Premium calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container" style="margin-top: 1.5rem;" >
+        <div class="row">
+            <div class="d-flex">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_create">Create premium</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="table-responsive">
+                <table class="table">
+                    <tr>
+                        <th>Carrier</th>
+                        <th>Plan</th>
+                        <th>State</th>
+                        <th>Month of Birth</th>
+                        <th>Age start</th>
+                        <th>Age end</th>
+                        <th>Premium</th>
+                        <th>Options</th>
+                    </tr>
+                    <tbody id="premiumbody">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal_create" tabindex="-1" aria-labelledby="modal_create" aria-hidden="true">
+        <div class="modal-dialog">
+            <form id="create_premium" action="#">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="modal_create_label">Create premium</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row form-group mb-3">
+                            <div class="col-md-12">
+                                <label class="control-label">Carrier</label>
+                                <input type="text" class="form-control" name="Carrier" required />
+                            </div>
+                        </div>
+                        <div class="row form-group mb-3">
+                            <label class="control-label">Plan</label>
+                            <div class="col-md-12">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" value="A" name="Plan">
+                                    <label class="form-check-label">
+                                        A
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" value="B" name="Plan">
+                                    <label class="form-check-label" >
+                                        B
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" value="C" name="Plan">
+                                    <label class="form-check-label" >
+                                        C
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" row form-group mb-3">
+                            <div  class="col-md-12">
+                                <label class="control-label">State</label>
+                                <input class="form-select" list="state" name="State" id="states" placeholder="Select or type" required>
+                                <datalist id="state">
+                                </datalist>
+                            </div>
+                        </div>
+                        <div class=" row form-group mb-3">
+                            <div  class="col-md-12">
+                                <label class="control-label">Month of birth</label>
+                                <select class="form-select" name="MonthOfBirth">
+                                    <option value="1">January</option>
+                                    <option value="2">February</option>
+                                    <option value="3">March</option>
+                                    <option value="4">April</option>
+                                    <option value="5">May</option>
+                                    <option value="6">June</option>
+                                    <option value="7">July</option>
+                                    <option value="8">August</option>
+                                    <option value="9">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                    <option value="*">Any (*)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row form-group mb-3">
+                            <div class="col-md-6">
+                                <label class="control-label">Start age</label>
+                                <input class="form-control" type="number" step="1" name="AgeRangeStart">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="control-label">End age</label>
+                                <input class="form-control" type="number" step="1" name="AgeRangeEnd">
+                            </div>
+                        </div>
+                        <div class="row form-group mb-3">
+                            <div class="col-md-12">
+                                <label class="control-label">Premium</label>
+                                <input class="form-control" type="number" step=".00001" name="Premium">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="close_modal_create">Close</button>
+                        <button class="btn btn-primary" type="submit" id="submit_create">Save changes</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+      </div>
+
+      <div class="modal fade" id="modal_update" tabindex="-1" aria-labelledby="modal_update" aria-hidden="true">
+        <div class="modal-dialog">
+            <form id="update_premium" action="#">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="modal_create_label">Edit premium</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="Identifier"/>
+                        <div class="row form-group mb-3">
+                            <div class="col-md-12">
+                                <label class="control-label">Carrier</label>
+                                <input type="text" class="form-control" name="Carrier" required />
+                            </div>
+                        </div>
+                        <div class="row form-group mb-3">
+                            <label class="control-label">Plan</label>
+                            <div class="col-md-12">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" value="A" name="Plan">
+                                    <label class="form-check-label">
+                                        A
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" value="B" name="Plan">
+                                    <label class="form-check-label" >
+                                        B
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" value="C" name="Plan">
+                                    <label class="form-check-label" >
+                                        C
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" row form-group mb-3">
+                            <div  class="col-md-12">
+                                <label class="control-label">State</label>
+                                <input class="form-select" list="state" name="State" id="states" placeholder="Select or type" required>
+                                <datalist id="state">
+                                </datalist>
+                            </div>
+                        </div>
+                        <div class=" row form-group mb-3">
+                            <div  class="col-md-12">
+                                <label class="control-label">Month of birth</label>
+                                <select class="form-select" name="MonthOfBirth">
+                                    <option value="1">January</option>
+                                    <option value="2">February</option>
+                                    <option value="3">March</option>
+                                    <option value="4">April</option>
+                                    <option value="5">May</option>
+                                    <option value="6">June</option>
+                                    <option value="7">July</option>
+                                    <option value="8">August</option>
+                                    <option value="9">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                    <option value="*">Any (*)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row form-group mb-3">
+                            <div class="col-md-6">
+                                <label class="control-label">Start age</label>
+                                <input class="form-control" type="number" step="1" name="AgeRangeStart">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="control-label">End age</label>
+                                <input class="form-control" type="number" step="1" name="AgeRangeEnd">
+                            </div>
+                        </div>
+                        <div class="row form-group mb-3">
+                            <div class="col-md-12">
+                                <label class="control-label">Premium</label>
+                                <input class="form-control" type="number" step=".00001" name="Premium">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="close_modal_update">Close</button>
+                        <button class="btn btn-primary" type="submit" id="submit_update">Save changes</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+      </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+  </body>
+  <script>
+    // States and List methods are called
+    states()
+    list()
+
+    //Listeners for both forms are added
+    var form_create = document.getElementById("create_premium")
+    var form_update = document.getElementById("update_premium")
+    form_create.addEventListener("submit",function(e){
+        console.log("submit")
+        e.preventDefault()
+        create(form_create);
+
+    })
+    form_update.addEventListener("submit",function(e){
+        console.log("submit")
+        e.preventDefault()
+        update(form_update);
+
+    })
+
+    //The update item function wich opens the modal and fill the fields with info of the selected premium
+    function update_item(identifier){
+        let row = document.getElementById(identifier);
+        
+    if (row) {
+        let cells = row.getElementsByTagName("td");
+        let carrier = cells[0].innerHTML;
+        let plan = cells[1].innerHTML.split(",");
+        let state = cells[2].innerHTML;
+        let mob = cells[3].getAttribute("data-value");
+        let ars = cells[4].innerHTML;
+        let are = cells[5].innerHTML;
+        let premium = cells[6].innerHTML;
+
+        //Fields are filled
+        form_update.Carrier.value = carrier
+        form_update.State.value = state
+        form_update.MonthOfBirth.value = mob
+        form_update.AgeRangeStart.value = ars
+        form_update.AgeRangeEnd.value = are
+        form_update.Premium.value = premium
+        
+        // a loop is run for the checkbox list of plans
+        let checkboxes = form_update.querySelectorAll('input[type="checkbox"]');
+        for (let j = 0 ; j < plan.length; j++){
+            for (let i = 0; i < checkboxes.length; i++) {
+                let checkbox = checkboxes[i];
+                if (checkbox.name === "Plan" && checkbox.value === plan[j]) {
+                    checkbox.checked = true;
+                }
+            }
+        }
+
+        //the identifier is added
+        form_update.Identifier.value = identifier
+
+    } else {
+        console.log("Row doesn't exists" );
+    }
+    }
+
+    function delete_item(identifier){
+        //The method to delete any premium
+        let postData = {identity:identifier.toString()}
+        fetch("https://localhost:7149/api/Premium/delete_premium", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(postData), 
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            alert(data.message)
+            list()
+        }).catch((error) => {
+            console.error("Fetch error:", error);
+            submitButton.disabled = false;
+        });;
+    }
+
+    function list(){
+        //Method to list the premiums from the server.
+        fetch("https://localhost:7149/api/Premium/list",{method:"GET"}).then((response) => {
+        return response.json();
+      }).then((data) => {        
+        data.forEach(element => {
+            
+            let table_body = document.getElementById("premiumbody");
+            let rows = ""
+            //if there is no premiums a message is shown.
+            if(data.length === 0){
+                rows = "<tr><td colspan='8'>No premiums are available</td></tr>"
+            }
+            //for each premium, the month value is searched and is replaced with a text version
+            data.forEach(element =>{
+                let month = "";
+                switch (element.monthOfBirth) {
+                    case "1":
+                        month = "January";
+                        break;
+                    case "2":
+                        month = "February";
+                        break;
+                    case "3":
+                        month = "March";
+                        break;
+                    case "4":
+                        month = "April";
+                        break;
+                    case "5":
+                        month = "May";
+                        break;
+                    case "6":
+                        month = "June";
+                        break;
+                    case "7":
+                        month = "July";
+                        break;
+                    case "8":
+                        month = "August";
+                        break;
+                    case "9":
+                        month = "September";
+                        break;
+                    case "10":
+                        month = "October";
+                        break;
+                    case "11":
+                        month = "November";
+                        break;
+                    case "12":
+                        month = "December";
+                        break;
+                    case "*":
+                        month = "Any";
+                        break;
+                    default:
+                        console.log("Invalid month number");
+                }
+
+                // The fields are filled and the identifier and butttons are added
+                row = "<tr id="+element.identifier+"><td>"+element.carrier+"</td><td>"+element.plan.join(",")+"</td><td>"+element.state+"</td><td data-value='"+element.monthOfBirth+"'>"+month+"</td><td>"+element.ageRangeStart+"</td><td>"+element.ageRangeEnd+"</td><td>"+element.premium+"</td><td><button class='btn btn-primary' onClick='update_item("+element.identifier+")' data-bs-toggle='modal' data-bs-target='#modal_update'>Edit</button><button class='btn btn-danger' onClick='delete_item("+element.identifier+")'>Delete</button></td></tr>"
+                rows = rows+row;
+            })
+
+            //The rows are added
+            table_body.innerHTML = rows;
+        });
+        
+      })
+    }
+
+    function update(form_update){
+        //The update method saves in the server the changes to an specified premium
+        let formData = new FormData(form_update);
+        let plans = []
+
+        formData.getAll("Plan").forEach(function(value) {
+            plans.push(value);
+        });
+
+        let identifier = formData.get("Identifier");
+        let carrier = formData.get("Carrier");
+        let state = formData.get("State");
+        let mob = formData.get("MonthOfBirth");
+        let ars = formData.get("AgeRangeStart");
+        let are = formData.get("AgeRangeEnd");
+        let premium = formData.get("Premium");
+        // age is validated
+        if (ars > are) {
+            alert("Age range start can't be lower than the Age range end field")
+            return -1
+        }
+        //an object is builded in order to send the data
+        let postData = {
+            identifier: identifier,
+            Carrier:carrier.replace(","," "),
+            State:state,
+            Plan:plans,
+            MonthOfBirth:mob,
+            AgeRangeStart:ars,
+            AgeRangeEnd:are,
+            Premium:premium
+        }
+        let submitButton = document.getElementById("submit_update");
+        submitButton.disabled = true;
+        fetch("https://localhost:7149/api/Premium/edit", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(postData),
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            //A message is displayed, the modal is closed and the list is refreshed if everything goes as planned
+            alert(data.message)
+            form_create.reset();
+            button_close = document.getElementById("close_modal_update");
+            button_close.click();
+            submitButton.disabled = false;
+            list()
+        }).catch((error) => {
+            //In case of server error, a message is shown.
+            console.error("Fetch error:", error);
+            submitButton.disabled = false;
+            alert("Something went wrong")
+        });;
+    }
+
+    function create(form_create){
+        //The create method saves in the server a new premium.
+        let formData = new FormData(form_create);
+        let plans = []
+
+        formData.getAll("Plan").forEach(function(value) {
+            plans.push(value);
+        });
+
+        let carrier = formData.get("Carrier");
+        let state = formData.get("State");
+        let mob = formData.get("MonthOfBirth");
+        let ars = formData.get("AgeRangeStart");
+        let are = formData.get("AgeRangeEnd");
+        let premium = formData.get("Premium");
+         // age is validated
+        if (ars > are) {
+            alert("Age range start can't be lower than the Age range end field")
+            return -1
+        }
+
+        //an object is builded in order to send the data
+        let postData = {
+            Carrier:carrier.replace(","," "),
+            State:state,
+            Plan:plans,
+            MonthOfBirth:mob,
+            AgeRangeStart:ars,
+            AgeRangeEnd:are,
+            Premium:premium
+        }
+        let submitButton = document.getElementById("submit_create");
+        submitButton.disabled = true;
+        fetch("https://localhost:7149/api/Premium/create", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(postData),
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+             //A message is displayed, the modal is closed and the list is refreshed if everything goes as planned
+            alert(data.message)
+            form_create.reset();
+            button_close = document.getElementById("close_modal_create");
+            button_close.click();
+            submitButton.disabled = false;
+            list()
+        }).catch((error) => {
+            //In case of server error, a message is shown.
+            console.error("Fetch error:", error);
+            submitButton.disabled = false;
+        });;
+    }
+
+    function states(){
+        fetch("https://localhost:7149/api/Premium/states",{method:"GET"}).then((response) => {
+        return response.json();
+      }).then((data) => {        
+        data.forEach(element => {
+            document.getElementById("state").append(new Option( element.short_name+" - "+element.long_name,element.short_name))
+        });
+        document.getElementById("state").append(new Option("ANY (*)","*"))
+      })
+    }
+  </script>
+</html>
