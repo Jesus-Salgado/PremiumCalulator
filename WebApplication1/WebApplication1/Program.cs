@@ -19,6 +19,8 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 app.UseCors("AllowAny");
 
+app.UseStaticFiles();
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

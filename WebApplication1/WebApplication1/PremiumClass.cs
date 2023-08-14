@@ -109,7 +109,7 @@ namespace WebApplication1
                         };
 
                     }
-                    if (premium != null)
+                    if (premium != null || (premium.Plan == null || premium.AgeRangeEnd == null || premium.AgeRangeEnd == null || premium.MonthOfBirth == null || premium.State == null))
                     {
                         premiums.Add(premium);
                     }

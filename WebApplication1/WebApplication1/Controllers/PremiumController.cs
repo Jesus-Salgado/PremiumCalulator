@@ -251,6 +251,10 @@ namespace WebApplication1.Controllers
                 //The premium data is run in a loop to find the ones with the coincidences
                 foreach (var premium in premiums)
                 {
+                    if (premium.Plan == null || premium.AgeRangeEnd == null || premium.AgeRangeEnd == null || premium.MonthOfBirth == null || premium.State == null) {
+                        continue;
+                    }
+
                     if ((premium.Plan.Contains(client.Plan) || premium.Plan.Contains("*")) && (premium.AgeRangeStart <= age && age <= premium.AgeRangeEnd) && (calculated_datetime.Month.ToString() == premium.MonthOfBirth || premium.MonthOfBirth == "*") && (premium.State == client.State.ToUpper() || premium.State == "*"))
                     {
                         response.Add(new { Carrier = premium.Carrier, Premium = premium.Premium });
