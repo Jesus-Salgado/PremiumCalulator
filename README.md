@@ -2,23 +2,24 @@
 
 The application runs locally on port 7149 with HTTPS enabled.
 
-Website Location:
-|- WebApplication1
-|  |- WebApplication1
-|  |  |- Website 
+## Website Location:
 
-Instructions:
-    Download the project.
-    Run the solution.
+	|- WebApplication1
+	|  |- WebApplication1
+	|  |  |- Website 
 
-    When the server is up and running, please navigate to the following routes:
+## Instructions:
+	-Download the project.
+	-Run the solution.
 
-    index.html (WebApplication1\WebApplication1\Website\index.html):
-        -This is the calculator screen, configured to call the local service.
+	When the server is up and running, please navigate to the following routes:
+	
+		index.html (WebApplication1\WebApplication1\Website\index.html):
+        	-This is the calculator screen, configured to call the local service.
 
-    premiums.html (WebApplication1\WebApplication1\Website\premiums.html):
-        -A maintenance page that allows the creation and modification of data for premium calculation.
+		premiums.html (WebApplication1\WebApplication1\Website\premiums.html):
+		-A maintenance page that allows the creation and modification of data for premium calculation.
 
-Persistence:
+## Persistence:
     A csv is located at the Data folder, this is just an example on how the premium data is stored.
     When the application is running, it will be the place where the data is stored, providing a certain level of data persistence within the application.
